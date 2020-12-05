@@ -1,4 +1,9 @@
 import './App.css';
+import { getScaleName } from './utils/MusicTheory'
+
+
+
+getScaleName();
 
 function App() {
   return (
