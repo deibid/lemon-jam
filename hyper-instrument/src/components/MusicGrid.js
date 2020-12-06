@@ -3,11 +3,21 @@ import { useState } from 'react';
 import { makeStyles, Button, Container, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core'
 
 
-function MusicGrid() {
 
-  const [columns, setColumns] = useState(4);
+const gridStyles = makeStyles((theme) => ({
+  root: {
+    marginTop: theme.spacing(4),
+    maxHeight: "52vh"
+  }
+}));
+
+
+function MusicGrid(props) {
+
+  const [columns, setColumns] = useState(8);
   const [rows, setRows] = useState(4);
 
+  const classes = gridStyles();
 
   const handleButtonClick = (e) => {
     console.log(e);
@@ -27,7 +37,7 @@ function MusicGrid() {
   for (let i = 0; i < rows; i++) {
     let row = [];
     for (let j = 0; j < columns; j++) {
-      row.push(<Bar key={`${i}${j}`} clickListener={handleBarClick} id={`${i}${j}`} />)
+      row.push(<Bar key={`${i}${j}`} clickListener={handleBarClick} id={`${i}${j}`} openModalListener={props.onOpenListener} />)
     }
     gridItems.push(<TableRow> {row}</TableRow>);
   }
@@ -36,7 +46,7 @@ function MusicGrid() {
   return (
 
     <React.Fragment>
-      <TableContainer>
+      <TableContainer className={classes.root}>
         <Table>
           <TableHead>
 
@@ -63,17 +73,19 @@ function MusicGrid() {
 
 
 
-const barStyles = makeStyles({
+const barStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: "#A5ABBC"
+    backgroundColor: "#A5ABBC",
+    textAlign: "center",
+    border: "1px solid black",
   }
-});
+}));
 
 function Bar(props) {
 
   const classes = barStyles();
   return (
-    <TableCell className={classes.root} onClick={props.clickListener} id={props.id}>
+    <TableCell className={classes.root} onClick={props.openModalListener} id={props.id} hover>
       <Typography variant="body2">C Major</Typography>
     </TableCell>
   )

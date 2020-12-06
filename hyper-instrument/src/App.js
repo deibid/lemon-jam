@@ -1,6 +1,5 @@
 import './App.css';
-import { getScaleName } from './utils/MusicTheory'
-
+import { getScaleName } from './utils/MusicTheory';
 import Home from './components/Home';
 
 
