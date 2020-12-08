@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Container, Typography, Button, Modal } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/Styles';
+import * as Tone from 'tone'
 
 import MusicGrid from './MusicGrid';
 import ScaleInputModal from './ScaleInputModal';
@@ -30,6 +31,12 @@ function Home() {
   const [bpm, setBPM] = useState(120);
 
 
+
+  const mainLoop = new Tone.Loop(time => {
+    console.log("beat");
+  }, "4n");
+
+
   const openModal = () => {
     setModalOpen(true);
     console.log('Home, open modal');
@@ -41,13 +48,14 @@ function Home() {
   }
 
   const handleBPMChange = (e) => {
+    console.log(`new bpm`);
+    console.log(e);
+    Tone.Transport.bpm.value = e
     setBPM(e);
   }
 
   const handlePlaybackChange = (e) => {
     console.log("playing...");
-
-
 
     switch (e.currentTarget.dataset.id) {
       case "play-button":
@@ -60,6 +68,19 @@ function Home() {
 
     }
   }
+
+
+  useEffect(() => {
+    console.log('use effect');
+    if (isPlaying) {
+      Tone.Transport.start();
+      mainLoop.start();
+    } else {
+      Tone.Transport.pause();
+      mainLoop.stop();
+    }
+
+  }, [isPlaying]);
 
 
 
