@@ -9,6 +9,7 @@ const gridStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(4),
     maxHeight: "52vh"
   }
+
 }));
 
 
@@ -16,6 +17,9 @@ function MusicGrid(props) {
 
   const [columns, setColumns] = useState(8);
   const [rows, setRows] = useState(4);
+
+  const currentBeat = props.currentBeat;
+  let currentBar = Math.floor(currentBeat / 4)
 
   const classes = gridStyles();
 
@@ -33,11 +37,17 @@ function MusicGrid(props) {
   }
 
   const gridItems = [];
-
+  let k = 0;
   for (let i = 0; i < rows; i++) {
     let row = [];
     for (let j = 0; j < columns; j++) {
-      row.push(<Bar key={`${i}${j}`} clickListener={handleBarClick} id={`${i}${j}`} openModalListener={props.onOpenListener} />)
+      row.push(<Bar key={`${i}${j}`}
+        clickListener={handleBarClick}
+        id={`${i}${j}`}
+        openModalListener={props.onOpenListener}
+        currentBar={currentBar}
+        thisBar={k} />)
+      k++;
     }
     gridItems.push(<TableRow> {row}</TableRow>);
   }
@@ -63,29 +73,24 @@ function MusicGrid(props) {
 }
 
 
-// function Row() {
 
-
-//   return (
-
-//   )
-// }
-
-
-
-const barStyles = makeStyles((theme) => ({
+const barStyles = makeStyles({
   root: {
-    backgroundColor: "#A5ABBC",
+    backgroundColor: props => props.currentBar === props.thisBar
+      ? "#CECECE"
+      : "#A5ABBC",
     textAlign: "center",
     border: "1px solid black",
   }
-}));
+});
 
 function Bar(props) {
 
-  const classes = barStyles();
+  console.log(`Bar props: currentBar ${props.currentBar} - thisBar ${props.thisBar}`);
+
+  const classes = barStyles(props);
   return (
-    <TableCell className={classes.root} onClick={props.openModalListener} id={props.id} hover>
+    <TableCell className={classes.root} onClick={props.openModalListener} id={props.id}>
       <Typography variant="body2">C Major</Typography>
     </TableCell>
   )

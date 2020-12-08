@@ -29,11 +29,13 @@ function Home() {
   const [modalOpen, setModalOpen] = useState(false);
   const [isPlaying, setPlaying] = useState(false);
   const [bpm, setBPM] = useState(120);
+  const [currentBeat, setCurrentBeat] = useState(1);
 
 
 
   const mainLoop = new Tone.Loop(time => {
     console.log("beat");
+    setCurrentBeat(state => state + 1);
   }, "4n");
 
 
@@ -44,18 +46,16 @@ function Home() {
 
   const modalClosed = () => {
     setModalOpen(false);
-    console.log('Home, close modal');
   }
 
   const handleBPMChange = (e) => {
-    console.log(`new bpm`);
-    console.log(e);
-    Tone.Transport.bpm.value = e
+    Tone.Transport.bpm.value = e;
     setBPM(e);
   }
 
   const handlePlaybackChange = (e) => {
-    console.log("playing...");
+
+    Tone.start();
 
     switch (e.currentTarget.dataset.id) {
       case "play-button":
@@ -79,8 +79,13 @@ function Home() {
       Tone.Transport.pause();
       mainLoop.stop();
     }
-
   }, [isPlaying]);
+
+
+  useEffect(() => {
+    console.log(`current beat ${currentBeat}`);
+
+  }, [currentBeat])
 
 
 
@@ -90,7 +95,7 @@ function Home() {
 
     <Container maxWidth="lg" className={classes.root}>
       <Typography variant='h1'>Hyper Instrument</Typography>
-      <MusicGrid onOpenListener={openModal} />
+      <MusicGrid onOpenListener={openModal} currentBeat={currentBeat} />
       {modalOpen && <ScaleInputModal onCloseListener={modalClosed} />}
       <PlaybackControls isPlaying={isPlaying} handlePlaybackButtonClick={handlePlaybackChange} bpm={bpm} onBPMChange={handleBPMChange} />
 
