@@ -63,7 +63,8 @@ function Home() {
         break;
 
       case "stop-button":
-        console.log("stopped");
+        setPlaying(false);
+        setCurrentBeat(0);
         break;
 
     }
@@ -80,12 +81,6 @@ function Home() {
       mainLoop.stop();
     }
   }, [isPlaying]);
-
-
-  useEffect(() => {
-    console.log(`current beat ${currentBeat}`);
-
-  }, [currentBeat])
 
 
 

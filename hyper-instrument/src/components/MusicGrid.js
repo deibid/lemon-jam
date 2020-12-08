@@ -37,7 +37,7 @@ function MusicGrid(props) {
   }
 
   const gridItems = [];
-  let k = 0;
+
   for (let i = 0; i < rows; i++) {
     let row = [];
     for (let j = 0; j < columns; j++) {
@@ -46,8 +46,8 @@ function MusicGrid(props) {
         id={`${i}${j}`}
         openModalListener={props.onOpenListener}
         currentBar={currentBar}
-        thisBar={k} />)
-      k++;
+        thisBar={i * columns + j} />)
+
     }
     gridItems.push(<TableRow> {row}</TableRow>);
   }
@@ -86,7 +86,7 @@ const barStyles = makeStyles({
 
 function Bar(props) {
 
-  console.log(`Bar props: currentBar ${props.currentBar} - thisBar ${props.thisBar}`);
+  // console.log(`Bar props: currentBar ${props.currentBar} - thisBar ${props.thisBar}`);
 
   const classes = barStyles(props);
   return (
