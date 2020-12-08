@@ -27,6 +27,7 @@ function Home() {
   const classes = useStyles();
   const [modalOpen, setModalOpen] = useState(false);
   const [isPlaying, setPlaying] = useState(false);
+  const [bpm, setBPM] = useState(120);
 
 
   const openModal = () => {
@@ -37,6 +38,10 @@ function Home() {
   const modalClosed = () => {
     setModalOpen(false);
     console.log('Home, close modal');
+  }
+
+  const handleBPMChange = (e) => {
+    setBPM(e);
   }
 
   const handlePlaybackChange = (e) => {
@@ -57,6 +62,7 @@ function Home() {
   }
 
 
+
   console.log("Render home");
 
   return (
@@ -65,7 +71,7 @@ function Home() {
       <Typography variant='h1'>Hyper Instrument</Typography>
       <MusicGrid onOpenListener={openModal} />
       {modalOpen && <ScaleInputModal onCloseListener={modalClosed} />}
-      <PlaybackControls isPlaying={isPlaying} handlePlaybackButtonClick={handlePlaybackChange} />
+      <PlaybackControls isPlaying={isPlaying} handlePlaybackButtonClick={handlePlaybackChange} bpm={bpm} onBPMChange={handleBPMChange} />
 
 
     </Container>
