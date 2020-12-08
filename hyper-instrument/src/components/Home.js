@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/Styles';
 
 import MusicGrid from './MusicGrid';
 import ScaleInputModal from './ScaleInputModal';
+import PlaybackControls from './PlaybackControls';
 
 
 const useStyles = makeStyles({
@@ -25,6 +26,7 @@ function Home() {
 
   const classes = useStyles();
   const [modalOpen, setModalOpen] = useState(false);
+  const [isPlaying, setPlaying] = useState(false);
 
 
   const openModal = () => {
@@ -37,6 +39,24 @@ function Home() {
     console.log('Home, close modal');
   }
 
+  const handlePlaybackChange = (e) => {
+    console.log("playing...");
+
+
+
+    switch (e.currentTarget.dataset.id) {
+      case "play-button":
+        setPlaying(state => !state);
+        break;
+
+      case "stop-button":
+        console.log("stopped");
+        break;
+
+    }
+  }
+
+
   console.log("Render home");
 
   return (
@@ -45,6 +65,7 @@ function Home() {
       <Typography variant='h1'>Hyper Instrument</Typography>
       <MusicGrid onOpenListener={openModal} />
       {modalOpen && <ScaleInputModal onCloseListener={modalClosed} />}
+      <PlaybackControls isPlaying={isPlaying} handlePlaybackButtonClick={handlePlaybackChange} />
 
 
     </Container>
