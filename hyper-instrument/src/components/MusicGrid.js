@@ -39,14 +39,19 @@ function MusicGrid(props) {
   const gridItems = [];
 
   for (let i = 0; i < rows; i++) {
+
     let row = [];
+
     for (let j = 0; j < columns; j++) {
-      row.push(<Bar key={`${i}${j}`}
-        clickListener={handleBarClick}
-        id={`${i}${j}`}
-        openModalListener={props.onOpenListener}
-        currentBar={currentBar}
-        thisBar={i * columns + j} />)
+
+      row.push(
+        <Bar key={`${i}${j}`}
+          clickListener={handleBarClick}
+          id={`${i}${j}`}
+          openModalListener={props.onOpenListener}
+          currentBar={currentBar}
+          thisBar={i * columns + j} />
+      )
 
     }
     gridItems.push(<TableRow> {row}</TableRow>);
@@ -90,7 +95,7 @@ function Bar(props) {
 
   const classes = barStyles(props);
   return (
-    <TableCell className={classes.root} onClick={props.openModalListener} id={props.id}>
+    <TableCell className={classes.root} onClick={() => props.openModalListener(props.thisBar)} id={props.thisBar}>
       <Typography variant="body2">C Major</Typography>
     </TableCell>
   )

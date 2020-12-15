@@ -16,7 +16,6 @@ const useStyles = makeStyles({
     backgroundColor: "#fefefe",
     display: "flex",
     flexDirection: "column",
-    // justifyContent: "center",
     textAlign: "center"
   }
 
@@ -30,6 +29,9 @@ function Home() {
   const [isPlaying, setPlaying] = useState(false);
   const [bpm, setBPM] = useState(120);
   const [currentBeat, setCurrentBeat] = useState(1);
+  const [scaleMapping, setScaleMapping] = useState([]);
+
+  let editingSlot;
 
 
 
@@ -39,13 +41,15 @@ function Home() {
   }, "4n");
 
 
-  const openModal = () => {
+  const openModal = (i) => {
     setModalOpen(true);
     console.log('Home, open modal');
+    console.log(i)
   }
 
-  const modalClosed = () => {
+  const modalClosed = (result) => {
     setModalOpen(false);
+    console.log(`result `, result);
   }
 
   const handleBPMChange = (e) => {
