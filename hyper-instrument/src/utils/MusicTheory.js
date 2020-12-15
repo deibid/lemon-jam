@@ -45,7 +45,7 @@ function scaleNameFromBinaryString(binaryString) {
   console.assert(binaryString.length == 12, 'binaryString should be of length 12 but here length is ' + binaryString.length);
 
   for (let i = 0; i < 12; i++) {
-    let rotated_string = binaryString.slice((-i) % 12) + binaryString.slice(0, (-i) % 12);
+    let rotated_string = binaryString.slice((i) % 12) + binaryString.slice(0, (i) % 12);
 
     if (rotated_string in scale_name_dict) {
       let tonic = pitch_name_dict[i];
