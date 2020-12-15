@@ -50,7 +50,8 @@ function MusicGrid(props) {
           id={`${i}${j}`}
           openModalListener={props.onOpenListener}
           currentBar={currentBar}
-          thisBar={i * columns + j} />
+          thisBar={i * columns + j}
+          text={props.scaleMapping[i * columns + j] || ""} />
       )
 
     }
@@ -86,6 +87,9 @@ const barStyles = makeStyles({
       : "#A5ABBC",
     textAlign: "center",
     border: "1px solid black",
+    width: 150,
+    height: 80,
+    padding: 0
   }
 });
 
@@ -96,7 +100,7 @@ function Bar(props) {
   const classes = barStyles(props);
   return (
     <TableCell className={classes.root} onClick={() => props.openModalListener(props.thisBar)} id={props.thisBar}>
-      <Typography variant="body2">C Major</Typography>
+      <Typography variant="body2">{props.text}</Typography>
     </TableCell>
   )
 

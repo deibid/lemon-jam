@@ -4,6 +4,8 @@ import { Container, Typography, Button, Modal } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/Styles';
 import * as Tone from 'tone'
 
+import { scaleNameFromBinaryString } from './../utils/MusicTheory';
+
 import MusicGrid from './MusicGrid';
 import ScaleInputModal from './ScaleInputModal';
 import PlaybackControls from './PlaybackControls';
@@ -29,11 +31,14 @@ function Home() {
   const [isPlaying, setPlaying] = useState(false);
   const [bpm, setBPM] = useState(120);
   const [currentBeat, setCurrentBeat] = useState(1);
-  const [scaleMapping, setScaleMapping] = useState([]);
+  const [scaleMapping, setScaleMapping] = useState({});
 
-  let editingSlot;
+  const [editingSlot, setEditingSlot] = useState(-1);
 
 
+  useEffect(() => {
+    console.log(scaleMapping)
+  }, [scaleMapping]);
 
   const mainLoop = new Tone.Loop(time => {
     console.log("beat");
@@ -44,12 +49,17 @@ function Home() {
   const openModal = (i) => {
     setModalOpen(true);
     console.log('Home, open modal');
+    setEditingSlot(i)
     console.log(i)
   }
 
   const modalClosed = (result) => {
     setModalOpen(false);
     console.log(`result `, result);
+    const scaleName = scaleNameFromBinaryString(result);
+
+    setScaleMapping(prev => { return { ...prev, [editingSlot]: scaleName } })
+
   }
 
   const handleBPMChange = (e) => {
@@ -94,7 +104,7 @@ function Home() {
 
     <Container maxWidth="lg" className={classes.root}>
       <Typography variant='h1'>Hyper Instrument</Typography>
-      <MusicGrid onOpenListener={openModal} currentBeat={currentBeat} />
+      <MusicGrid scaleMapping={scaleMapping} onOpenListener={openModal} currentBeat={currentBeat} />
       {modalOpen && <ScaleInputModal onCloseListener={modalClosed} />}
       <PlaybackControls isPlaying={isPlaying} handlePlaybackButtonClick={handlePlaybackChange} bpm={bpm} onBPMChange={handleBPMChange} />
 
