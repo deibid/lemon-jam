@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Container, Typography, Button, Modal } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/Styles';
 import * as Tone from 'tone'
+import * as jsonexport from 'jsonexport/dist';
 
 import { scaleNameFromBinaryString } from './../utils/MusicTheory';
 
@@ -34,7 +35,10 @@ function Home() {
   const [scaleMapping, setScaleMapping] = useState({});
 
   const [editingSlot, setEditingSlot] = useState(-1);
+  const [selectedScale, setSelectedScale] = useState('');
 
+  const [copyMode, setCopyMode] = useState(false);
+  const [scaleToCopy, setScaleToCopy] = useState('');
 
   useEffect(() => {
     console.log(scaleMapping)
@@ -47,9 +51,36 @@ function Home() {
 
 
   const openModal = (i) => {
-    setModalOpen(true);
+
+
+    if (!copyMode) {
+      setModalOpen(true);
+    }
+
+
     console.log('Home, open modal');
-    setEditingSlot(i)
+    setEditingSlot(i);
+
+    const scale = scaleMapping[i];
+    setSelectedScale(scale);
+    console.log(`selected scale   `, scale)
+
+
+    if (copyMode) {
+      let _scaleToCopy;
+
+      if (scaleToCopy !== '') {
+        setScaleMapping(prev => { return { ...prev, [editingSlot]: scaleToCopy } })
+        // setScaleToCopy('');
+      } else {
+        setScaleToCopy(scale);
+      }
+
+    }
+
+
+
+
     console.log(i)
   }
 
@@ -59,6 +90,31 @@ function Home() {
     const scaleName = scaleNameFromBinaryString(result);
 
     setScaleMapping(prev => { return { ...prev, [editingSlot]: scaleName } })
+
+  }
+
+
+  const exportState = () => {
+
+    jsonexport(scaleMapping, function (err, csv) {
+      if (err) return console.log(err);
+      var myURL = window.URL || window.webkitURL //window.webkitURL works in Chrome and window.URL works in Firefox
+      var csv = csv;
+      var blob = new Blob([csv], { type: 'text/csv' });
+      var csvUrl = myURL.createObjectURL(blob);
+      // setFiledownloadlink(csvUrl);
+      window.location.assign(csvUrl);
+    });
+
+  }
+
+
+  const handleCopyModeChange = (e) => {
+
+    if (copyMode) setScaleToCopy('');
+    setCopyMode(prev => !prev);
+
+
 
   }
 
@@ -104,11 +160,11 @@ function Home() {
 
     <Container maxWidth="lg" className={classes.root}>
       <Typography variant='h1'>Hyper Instrument</Typography>
-      <MusicGrid scaleMapping={scaleMapping} onOpenListener={openModal} currentBeat={currentBeat} />
-      {modalOpen && <ScaleInputModal onCloseListener={modalClosed} />}
+      <MusicGrid scaleMapping={scaleMapping} onOpenListener={openModal} currentBeat={currentBeat} copyMode={copyMode} />
+      {modalOpen && <ScaleInputModal onCloseListener={modalClosed} scale={selectedScale} />}
       <PlaybackControls isPlaying={isPlaying} handlePlaybackButtonClick={handlePlaybackChange} bpm={bpm} onBPMChange={handleBPMChange} />
-
-
+      <Button onClick={handleCopyModeChange} variant='filled'>{copyMode ? 'Stop Copying' : 'Enter Copy Mode'}</Button>
+      <Button onClick={exportState} variant='contained'>Export</Button>
     </Container>
 
   )

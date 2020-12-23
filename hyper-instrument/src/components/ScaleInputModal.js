@@ -35,6 +35,8 @@ export default function ScaleInputModal(props) {
   const classes = useStyles();
   let slots = [];
 
+  const scale = props.scale;
+
   const [selected, setSelected] = useState([]);
 
 
@@ -120,6 +122,7 @@ const useNoteStyles = makeStyles((theme) => ({
   }
 
 }));
+
 const NoteSlot = (props) => {
 
   const classes = useNoteStyles();

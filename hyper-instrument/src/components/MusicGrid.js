@@ -30,7 +30,10 @@ function MusicGrid(props) {
 
   const handleBarClick = (e) => {
 
+    e.preventDefault();
     const id = e.target.id;
+
+    console.log(`which-> ${e.nativeEvent.which}`)
     console.log('click');
     console.log(id);
 
@@ -51,6 +54,7 @@ function MusicGrid(props) {
           openModalListener={props.onOpenListener}
           currentBar={currentBar}
           thisBar={i * columns + j}
+          copyMode={props.copyMode}
           text={props.scaleMapping[i * columns + j] || ""} />
       )
 
@@ -82,9 +86,11 @@ function MusicGrid(props) {
 
 const barStyles = makeStyles({
   root: {
-    backgroundColor: props => props.currentBar === props.thisBar
-      ? "#CECECE"
-      : "#A5ABBC",
+    backgroundColor: props => {
+      let color = props.currentBar === props.thisBar ? "#CECECE" : "#A5ABBC";
+      if (props.copyMode) color = '#EDA15D';
+      return color;
+    },
     textAlign: "center",
     border: "1px solid black",
     width: 150,
