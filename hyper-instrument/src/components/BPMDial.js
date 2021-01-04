@@ -41,6 +41,6 @@ export default function BPMDial(props) {
           'aria-labelledby': 'input-slider',
         }}
       />
-    </div >
+    </div>
   );
 }
