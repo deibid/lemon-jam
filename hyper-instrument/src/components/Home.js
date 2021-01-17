@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { Container, Typography, Button, Modal } from '@material-ui/core';
+import { Container, Typography, Button, Modal, Backdrop } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/Styles';
 import * as Tone from 'tone'
 import * as jsonexport from 'jsonexport/dist';
@@ -11,7 +11,7 @@ import MusicGrid from './MusicGrid';
 import ScaleInputModal from './ScaleInputModal';
 import PlaybackControls from './PlaybackControls';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectBPM, selectKeySignature, selectTimeSignature, selectPlaybackStatus, selectComposition, TimeSignatures } from './../store/appSessionSlice';
+import { selectEditingAttribute, selectBPM, selectKeySignature, selectTimeSignature, selectPlaybackStatus, selectComposition, TimeSignatures } from './../store/appSessionSlice';
 
 import ActionBar from './ActionBar';
 import BPMInput from './BPMInput';
@@ -27,6 +27,9 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     textAlign: "center",
     padding: theme.spacing(0)
+  },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1
   }
 }));
 
@@ -40,7 +43,9 @@ function Home() {
   const keySignature = useSelector(selectKeySignature);
   const timeSignature = useSelector(selectTimeSignature);
   const playbackStatus = useSelector(selectPlaybackStatus);
+  const editingAttribute = useSelector(selectEditingAttribute);
 
+  const backdropOpen = editingAttribute !== '';
 
 
 
@@ -172,22 +177,29 @@ function Home() {
 
 
 
+  const handleBackdropClose = e => {
+    console.log('backdrop')
+  }
   console.log("Render home");
 
   return (
 
     <Container maxWidth={false} className={classes.root}>
       <ActionBar />
-      {/* <BPMInput /> */}
-      {/* <TimeSignatureInput /> */}
-      <KeySignatureInput />
+
       {/* <Typography variant='h1'>Hyper Instrument</Typography>
       <MusicGrid scaleMapping={scaleMapping} onOpenListener={openModal} currentBeat={currentBeat} copyMode={copyMode} />
       {modalOpen && <ScaleInputModal onCloseListener={modalClosed} scale={selectedScale} />}
       <PlaybackControls isPlaying={isPlaying} handlePlaybackButtonClick={handlePlaybackChange} bpm={bpm} onBPMChange={handleBPMChange} />
       <Button onClick={handleCopyModeChange} variant='filled'>{copyMode ? 'Stop Copying' : 'Enter Copy Mode'}</Button>
       <Button onClick={exportState} variant='contained'>Export</Button> */}
+      <Backdrop className={classes.backdrop} open={backdropOpen} onClick={handleBackdropClose}>
+        {/* <BPMInput />
+        <TimeSignatureInput />
+        <KeySignatureInput /> */}
+      </Backdrop>
     </Container>
+
 
   )
 

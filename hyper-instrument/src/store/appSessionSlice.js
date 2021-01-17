@@ -34,10 +34,17 @@ export const KeySignatures_mode = Object.freeze({
   'MINOR': 'minor'
 });
 
+export const Attributes = Object.freeze({
+  'KEY_SIGNATURE': 'keySignature',
+  'TIME_SIGNATURE': 'timeSignature',
+  'BPM': 'bpm',
+  'COMPOSITION': 'composition'
+});
 
 
 const initialState = {
   playbackStatus: PlaybackStatues.STOP,
+  editingAttribute: '',
   bpm: 120,
   timeSignature: TimeSignatures['4/4'],
   keySignature: {
@@ -52,6 +59,9 @@ export const appSessionSlice = createSlice({
   name: 'appSession',
   initialState,
   reducers: {
+    changeEditingAttribute: (state, action) => {
+      state.editingAttribute = action.payload.data;
+    },
     changeBPM: (state, action) => {
       state.bpm = action.payload.data;
     },
@@ -76,11 +86,12 @@ export const appSessionSlice = createSlice({
 
 
 export const {
-  changeBPM, changeKeySignatureKey, changeKeySignatureMode, changeTimeSignature, changePlaybackStatus, editComposition }
+  changeBPM, changeEditingAttribute, changeKeySignatureKey, changeKeySignatureMode, changeTimeSignature, changePlaybackStatus, editComposition }
   = appSessionSlice.actions;
 export default appSessionSlice.reducer;
 
 
+export const selectEditingAttribute = state => state.appSession.editingAttribute;
 export const selectBPM = state => state.appSession.bpm;
 export const selectKeySignature = state => state.appSession.keySignature;
 export const selectTimeSignature = state => state.appSession.timeSignature;

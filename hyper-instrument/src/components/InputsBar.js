@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, makeStyles, Button } from '@material-ui/core';
-import { useSelector } from 'react-redux';
-import { selectPlaybackStatus } from '../store/appSessionSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeEditingAttribute, selectPlaybackStatus, Attributes } from '../store/appSessionSlice';
 
 
 const useStyles = makeStyles(theme => ({
@@ -14,19 +14,23 @@ const useStyles = makeStyles(theme => ({
 const InputsBar = () => {
 
   const classes = useStyles();
+  const dispatch = useDispatch();
   const playbackStatus = useSelector(selectPlaybackStatus);
 
 
   const handleClick = label => e => {
     console.log(label);
+    dispatch(changeEditingAttribute({ data: label }));
   }
+
+
 
   return (
     <Box display='flex'>
 
-      <Button className={classes.button} onClick={handleClick('bpm')}>BPM</Button>
-      <Button className={classes.button} onClick={handleClick('time')}>Time Signature</Button>
-      <Button className={classes.button} onClick={handleClick('key')}>Key</Button>
+      <Button className={classes.button} onClick={handleClick(Attributes.BPM)}>BPM</Button>
+      <Button className={classes.button} onClick={handleClick(Attributes.TIME_SIGNATURE)}>Time Signature</Button>
+      <Button className={classes.button} onClick={handleClick(Attributes.KEY_SIGNATURE)}>Key</Button>
     </Box>
   )
 

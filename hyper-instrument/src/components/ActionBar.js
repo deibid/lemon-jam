@@ -1,8 +1,15 @@
 import React from 'react';
-import { AppBar, Toolbar, makeStyles, Box, Typography, Button } from '@material-ui/core';
+import { AppBar, Toolbar, makeStyles, Box, Typography, Button, Slide, Paper } from '@material-ui/core';
 import PlaybackBar from './PlaybackBar';
 import InputsBar from './InputsBar';
 import FileBar from './FileBar';
+import { useSelector } from 'react-redux';
+import { selectEditingAttribute } from '../store/appSessionSlice';
+
+import BPMInput from './BPMInput';
+import KeySignatureInput from './KeySignatureInput';
+import TimeSignatureInput from './TimeSignatureInput';
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -18,12 +25,20 @@ const useStyles = makeStyles(theme => ({
   },
   inputs: {
     flexGrow: 2,
+  },
+  paper: {
+    background: theme.palette.common.primaryBlue,
+    display: 'flex',
+
   }
 }));
 
 const ActionBar = () => {
 
   const classes = useStyles();
+
+  const editingAttribute = useSelector(selectEditingAttribute);
+  const backdropOpen = editingAttribute !== '';
 
   return (
     <AppBar position="sticky">
@@ -43,12 +58,16 @@ const ActionBar = () => {
 
 
       </Toolbar>
-      <Box display='flex' height={40} background="#555555">
 
-        {/* File options */}
-        {/* Action options */}
-        {/* Input options */}
-      </Box>
+
+      <Slide direction="down" in={backdropOpen} mountOnEnter unmountOnExit>
+        <Paper elevation={1} className={classes.paper}>
+
+          <BPMInput />
+          <TimeSignatureInput />
+          <KeySignatureInput />
+        </Paper>
+      </Slide>
 
     </AppBar>
   )
