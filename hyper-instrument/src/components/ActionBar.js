@@ -9,6 +9,7 @@ import { selectEditingAttribute } from '../store/appSessionSlice';
 import BPMInput from './BPMInput';
 import KeySignatureInput from './KeySignatureInput';
 import TimeSignatureInput from './TimeSignatureInput';
+import theme from '../theme';
 
 
 
@@ -16,6 +17,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     background: theme.palette.common.primaryBlue,
     display: 'flex',
+    zIndex: theme.zIndex.drawer + 2
   },
   file: {
     flexGrow: 2
@@ -29,6 +31,9 @@ const useStyles = makeStyles(theme => ({
   paper: {
     background: theme.palette.common.primaryBlue,
     display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    padding: theme.spacing(4)
 
   }
 }));
@@ -41,7 +46,7 @@ const ActionBar = () => {
   const backdropOpen = editingAttribute !== '';
 
   return (
-    <AppBar position="sticky">
+    <AppBar position="sticky" className={classes.root}>
       <Toolbar className={classes.root}>
 
         <div className={classes.file}>
@@ -62,7 +67,6 @@ const ActionBar = () => {
 
       <Slide direction="down" in={backdropOpen} mountOnEnter unmountOnExit>
         <Paper elevation={1} className={classes.paper}>
-
           <BPMInput />
           <TimeSignatureInput />
           <KeySignatureInput />

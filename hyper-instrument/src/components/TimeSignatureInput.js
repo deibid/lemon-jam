@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { makeStyles, Box } from '@material-ui/core';
+import { makeStyles, Typography } from '@material-ui/core';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 
 
@@ -14,6 +14,12 @@ const useStyles = makeStyles(theme => ({
   button: {
     margin: theme.spacing(0, 1),
     width: theme.spacing(8)
+  },
+  title: {
+    color: '#fff',
+  },
+  inputBackground: {
+    marginTop: theme.spacing(2)
   }
 }));
 
@@ -29,22 +35,21 @@ const TimeSignatureInput = () => {
     dispatch(changeTimeSignature({ data: newValue }))
   }
   return (
+    <div className={classes.root}>
+      <Typography variant='h5' className={classes.title}>Time Signature</Typography>
+      <InputBackground className={classes.inputBackground}>
+        <ToggleButtonGroup onChange={handleChange} value={timeSignature} exclusive>
 
 
-    <InputBackground>
-      <ToggleButtonGroup onChange={handleChange} value={timeSignature} exclusive>
+          <ToggleButton className={classes.button} value={TimeSignatures['3/4']}>3/4</ToggleButton>
+          <ToggleButton className={classes.button} value={TimeSignatures['4/4']}>4/4</ToggleButton>
+          <ToggleButton className={classes.button} value={TimeSignatures['6/8']}>6/8</ToggleButton>
 
 
-        <ToggleButton className={classes.button} value={TimeSignatures['3/4']}>3/4</ToggleButton>
-        <ToggleButton className={classes.button} value={TimeSignatures['4/4']}>4/4</ToggleButton>
-        <ToggleButton className={classes.button} value={TimeSignatures['6/8']}>6/8</ToggleButton>
-
-
-      </ToggleButtonGroup>
-    </InputBackground>
+        </ToggleButtonGroup>
+      </InputBackground>
+    </div>
   )
-
-
 }
 
 export default TimeSignatureInput;

@@ -29,8 +29,7 @@ const InputBackground = (props) => {
   const disableSubContainer = props.disableSubContainer;
 
   return (
-    <div className={classes.root} >
-
+    <div className={classes.root}>
 
       {disableSubContainer ?
 

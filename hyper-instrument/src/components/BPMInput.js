@@ -23,6 +23,9 @@ const useStyles = makeStyles(theme => ({
   },
   slider: {
     marginLeft: theme.spacing(1)
+  },
+  title: {
+    color: '#fff'
   }
 }));
 
@@ -42,9 +45,10 @@ const BPMInput = (props) => {
   return (
     <div className={classes.root}>
 
+      <Typography variant='h5' className={classes.title}>BPM</Typography>
       <InputBackground>
 
-        <GraySlider min={40} max={220} onChange={handleChange} className={classes.slider} />
+        <GraySlider value={bpm} min={40} max={220} onChange={handleChange} className={classes.slider} />
         <div className={classes.value}>
           <Typography variant='body2'>{bpm}</Typography>
         </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { makeStyles, Box } from '@material-ui/core';
+import { makeStyles, Box, Typography } from '@material-ui/core';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 
 
@@ -24,6 +24,9 @@ const useStyles = makeStyles(theme => ({
   },
   modeButton: {
     flexGrow: 1
+  },
+  title: {
+    color: '#fff'
   }
 }));
 
@@ -44,43 +47,44 @@ const KeySignatureInput = () => {
   }
 
   return (
+    <div>
+      <Typography variant='h5' className={classes.title}>Key Signature</Typography>
+      <InputBackground disableSubContainer>
+
+        <Box display='flex' flexDirection='column' className={classes.root}>
+          <ToggleButtonGroup className={classes.toggleGroup} onChange={handleKeyChange} value={keySignature.key} exclusive>
+
+            <ToggleButton className={classes.button} value={KeySignatures_key['C']}>C</ToggleButton>
+            <ToggleButton className={classes.button} value={KeySignatures_key['C#']}>C#</ToggleButton>
+            <ToggleButton className={classes.button} value={KeySignatures_key['D']}>D</ToggleButton>
+            <ToggleButton className={classes.button} value={KeySignatures_key['D#']}>D#</ToggleButton>
+            <ToggleButton className={classes.button} value={KeySignatures_key['E']}>E</ToggleButton>
+            <ToggleButton className={classes.button} value={KeySignatures_key['F']}>F</ToggleButton>
+
+          </ToggleButtonGroup>
+
+          <ToggleButtonGroup className={classes.toggleGroup} onChange={handleKeyChange} value={keySignature.key} exclusive>
+
+            <ToggleButton className={classes.button} value={KeySignatures_key['F#']}>F#</ToggleButton>
+            <ToggleButton className={classes.button} value={KeySignatures_key['G']}>G</ToggleButton>
+            <ToggleButton className={classes.button} value={KeySignatures_key['G#']}>G#</ToggleButton>
+            <ToggleButton className={classes.button} value={KeySignatures_key['A']}>A</ToggleButton>
+            <ToggleButton className={classes.button} value={KeySignatures_key['A#']}>A#</ToggleButton>
+            <ToggleButton className={classes.button} value={KeySignatures_key['B']}>B</ToggleButton>
+
+          </ToggleButtonGroup>
+
+          <ToggleButtonGroup className={classes.toggleGroup} onChange={handleModeChange} value={keySignature.mode} exclusive>
+
+            <ToggleButton className={classes.modeButton} value={KeySignatures_mode.MAJOR}>Major</ToggleButton>
+            <ToggleButton className={classes.modeButton} value={KeySignatures_mode.MINOR}>Minor</ToggleButton>
 
 
-    <InputBackground disableSubContainer>
+          </ToggleButtonGroup>
+        </Box>
 
-      <Box display='flex' flexDirection='column' className={classes.root}>
-        <ToggleButtonGroup className={classes.toggleGroup} onChange={handleKeyChange} value={keySignature.key} exclusive>
-
-          <ToggleButton className={classes.button} value={KeySignatures_key['C']}>C</ToggleButton>
-          <ToggleButton className={classes.button} value={KeySignatures_key['C#']}>C#</ToggleButton>
-          <ToggleButton className={classes.button} value={KeySignatures_key['D']}>D</ToggleButton>
-          <ToggleButton className={classes.button} value={KeySignatures_key['D#']}>D#</ToggleButton>
-          <ToggleButton className={classes.button} value={KeySignatures_key['E']}>E</ToggleButton>
-          <ToggleButton className={classes.button} value={KeySignatures_key['F']}>F</ToggleButton>
-
-        </ToggleButtonGroup>
-
-        <ToggleButtonGroup className={classes.toggleGroup} onChange={handleKeyChange} value={keySignature.key} exclusive>
-
-          <ToggleButton className={classes.button} value={KeySignatures_key['F#']}>F#</ToggleButton>
-          <ToggleButton className={classes.button} value={KeySignatures_key['G']}>G</ToggleButton>
-          <ToggleButton className={classes.button} value={KeySignatures_key['G#']}>G#</ToggleButton>
-          <ToggleButton className={classes.button} value={KeySignatures_key['A']}>A</ToggleButton>
-          <ToggleButton className={classes.button} value={KeySignatures_key['A#']}>A#</ToggleButton>
-          <ToggleButton className={classes.button} value={KeySignatures_key['B']}>B</ToggleButton>
-
-        </ToggleButtonGroup>
-
-        <ToggleButtonGroup className={classes.toggleGroup} onChange={handleModeChange} value={keySignature.mode} exclusive>
-
-          <ToggleButton className={classes.modeButton} value={KeySignatures_mode.MAJOR}>Major</ToggleButton>
-          <ToggleButton className={classes.modeButton} value={KeySignatures_mode.MINOR}>Minor</ToggleButton>
-
-
-        </ToggleButtonGroup>
-      </Box>
-
-    </InputBackground>
+      </InputBackground>
+    </div>
   )
 
 

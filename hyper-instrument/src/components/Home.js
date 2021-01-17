@@ -11,7 +11,7 @@ import MusicGrid from './MusicGrid';
 import ScaleInputModal from './ScaleInputModal';
 import PlaybackControls from './PlaybackControls';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectEditingAttribute, selectBPM, selectKeySignature, selectTimeSignature, selectPlaybackStatus, selectComposition, TimeSignatures } from './../store/appSessionSlice';
+import { selectEditingAttribute, changeEditingAttribute, selectBPM, selectKeySignature, selectTimeSignature, selectPlaybackStatus, selectComposition, TimeSignatures } from './../store/appSessionSlice';
 
 import ActionBar from './ActionBar';
 import BPMInput from './BPMInput';
@@ -179,6 +179,7 @@ function Home() {
 
   const handleBackdropClose = e => {
     console.log('backdrop')
+    dispatch(changeEditingAttribute({ data: '' }));
   }
   console.log("Render home");
 
