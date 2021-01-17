@@ -10,27 +10,42 @@ import { scaleNameFromBinaryString } from './../utils/MusicTheory';
 import MusicGrid from './MusicGrid';
 import ScaleInputModal from './ScaleInputModal';
 import PlaybackControls from './PlaybackControls';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectBPM, selectKeySignature, selectTimeSignature, selectPlaybackStatus, selectComposition } from './../store/appSessionSlice';
 
+import ActionBar from './ActionBar';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
     height: "100vh",
     backgroundColor: "#fefefe",
     display: "flex",
     flexDirection: "column",
-    textAlign: "center"
+    textAlign: "center",
+    padding: theme.spacing(0)
   }
-
-});
+}));
 
 
 function Home() {
 
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const bpm = useSelector(selectBPM);
+  const keySignature = useSelector(selectKeySignature);
+  const timeSignature = useSelector(selectTimeSignature);
+  const playbackStatus = useSelector(selectPlaybackStatus);
+
+
+
+
+
+
   const [modalOpen, setModalOpen] = useState(false);
   const [isPlaying, setPlaying] = useState(false);
-  const [bpm, setBPM] = useState(120);
+  // const [bpm, setBPM] = useState(120);
   const [currentBeat, setCurrentBeat] = useState(1);
   const [scaleMapping, setScaleMapping] = useState({});
 
@@ -40,117 +55,117 @@ function Home() {
   const [copyMode, setCopyMode] = useState(false);
   const [scaleToCopy, setScaleToCopy] = useState('');
 
-  useEffect(() => {
-    console.log(scaleMapping)
-  }, [scaleMapping]);
+  // useEffect(() => {
+  //   console.log(scaleMapping)
+  // }, [scaleMapping]);
 
-  const mainLoop = new Tone.Loop(time => {
-    console.log("beat");
-    setCurrentBeat(state => state + 1);
-  }, "4n");
-
-
-  const openModal = (i) => {
+  // const mainLoop = new Tone.Loop(time => {
+  //   console.log("beat");
+  //   setCurrentBeat(state => state + 1);
+  // }, "4n");
 
 
-    if (!copyMode) {
-      setModalOpen(true);
-    }
+  // const openModal = (i) => {
 
 
-    console.log('Home, open modal');
-    setEditingSlot(i);
-
-    const scale = scaleMapping[i];
-    setSelectedScale(scale);
-    console.log(`selected scale   `, scale)
+  //   if (!copyMode) {
+  //     setModalOpen(true);
+  //   }
 
 
-    if (copyMode) {
-      let _scaleToCopy;
+  //   console.log('Home, open modal');
+  //   setEditingSlot(i);
 
-      if (scaleToCopy !== '') {
-        setScaleMapping(prev => { return { ...prev, [editingSlot]: scaleToCopy } })
-        // setScaleToCopy('');
-      } else {
-        setScaleToCopy(scale);
-      }
-
-    }
+  //   const scale = scaleMapping[i];
+  //   setSelectedScale(scale);
+  //   console.log(`selected scale   `, scale)
 
 
+  //   if (copyMode) {
+  //     let _scaleToCopy;
 
+  //     if (scaleToCopy !== '') {
+  //       setScaleMapping(prev => { return { ...prev, [editingSlot]: scaleToCopy } })
+  //       // setScaleToCopy('');
+  //     } else {
+  //       setScaleToCopy(scale);
+  //     }
 
-    console.log(i)
-  }
-
-  const modalClosed = (result) => {
-    setModalOpen(false);
-    console.log(`result `, result);
-    const scaleName = scaleNameFromBinaryString(result);
-
-    setScaleMapping(prev => { return { ...prev, [editingSlot]: scaleName } })
-
-  }
-
-
-  const exportState = () => {
-
-    jsonexport(scaleMapping, function (err, csv) {
-      if (err) return console.log(err);
-      var myURL = window.URL || window.webkitURL //window.webkitURL works in Chrome and window.URL works in Firefox
-      var csv = csv;
-      var blob = new Blob([csv], { type: 'text/csv' });
-      var csvUrl = myURL.createObjectURL(blob);
-      // setFiledownloadlink(csvUrl);
-      window.location.assign(csvUrl);
-    });
-
-  }
-
-
-  const handleCopyModeChange = (e) => {
-
-    if (copyMode) setScaleToCopy('');
-    setCopyMode(prev => !prev);
+  //   }
 
 
 
-  }
 
-  const handleBPMChange = (e) => {
-    Tone.Transport.bpm.value = e;
-    setBPM(e);
-  }
+  //   console.log(i)
+  // }
 
-  const handlePlaybackChange = (e) => {
+  // const modalClosed = (result) => {
+  //   setModalOpen(false);
+  //   console.log(`result `, result);
+  //   const scaleName = scaleNameFromBinaryString(result);
 
-    Tone.start();
+  //   setScaleMapping(prev => { return { ...prev, [editingSlot]: scaleName } })
 
-    switch (e.currentTarget.dataset.id) {
-      case "play-button":
-        setPlaying(state => !state);
-        break;
-
-      case "stop-button":
-        setPlaying(false);
-        setCurrentBeat(0);
-        break;
-
-    }
-  }
+  // }
 
 
-  useEffect(() => {
-    console.log('use effect');
-    if (isPlaying) {
-      Tone.Transport.start();
-      mainLoop.start();
-    } else {
-      Tone.Transport.pause();
-      mainLoop.stop();
-    }
-  }, [isPlaying]);
+  // const exportState = () => {
+
+  //   jsonexport(scaleMapping, function (err, csv) {
+  //     if (err) return console.log(err);
+  //     var myURL = window.URL || window.webkitURL //window.webkitURL works in Chrome and window.URL works in Firefox
+  //     var csv = csv;
+  //     var blob = new Blob([csv], { type: 'text/csv' });
+  //     var csvUrl = myURL.createObjectURL(blob);
+  //     // setFiledownloadlink(csvUrl);
+  //     window.location.assign(csvUrl);
+  //   });
+
+  // }
+
+
+  // const handleCopyModeChange = (e) => {
+
+  //   if (copyMode) setScaleToCopy('');
+  //   setCopyMode(prev => !prev);
+
+
+
+  // }
+
+  // const handleBPMChange = (e) => {
+  //   Tone.Transport.bpm.value = e;
+  //   setBPM(e);
+  // }
+
+  // const handlePlaybackChange = (e) => {
+
+  //   Tone.start();
+
+  //   switch (e.currentTarget.dataset.id) {
+  //     case "play-button":
+  //       setPlaying(state => !state);
+  //       break;
+
+  //     case "stop-button":
+  //       setPlaying(false);
+  //       setCurrentBeat(0);
+  //       break;
+
+  //   }
+  // }
+
+
+  // useEffect(() => {
+  //   console.log('use effect');
+  //   if (isPlaying) {
+  //     Tone.Transport.start();
+  //     mainLoop.start();
+  //   } else {
+  //     Tone.Transport.pause();
+  //     mainLoop.stop();
+  //   }
+  // }, [isPlaying]);
 
 
 
@@ -158,13 +173,14 @@ function Home() {
 
   return (
 
-    <Container maxWidth="lg" className={classes.root}>
-      <Typography variant='h1'>Hyper Instrument</Typography>
+    <Container maxWidth={false} className={classes.root}>
+      <ActionBar />
+      {/* <Typography variant='h1'>Hyper Instrument</Typography>
       <MusicGrid scaleMapping={scaleMapping} onOpenListener={openModal} currentBeat={currentBeat} copyMode={copyMode} />
       {modalOpen && <ScaleInputModal onCloseListener={modalClosed} scale={selectedScale} />}
       <PlaybackControls isPlaying={isPlaying} handlePlaybackButtonClick={handlePlaybackChange} bpm={bpm} onBPMChange={handleBPMChange} />
       <Button onClick={handleCopyModeChange} variant='filled'>{copyMode ? 'Stop Copying' : 'Enter Copy Mode'}</Button>
-      <Button onClick={exportState} variant='contained'>Export</Button>
+      <Button onClick={exportState} variant='contained'>Export</Button> */}
     </Container>
 
   )

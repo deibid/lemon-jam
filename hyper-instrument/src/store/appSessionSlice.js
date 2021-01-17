@@ -74,7 +74,11 @@ export const {
 export default appSessionSlice.reducer;
 
 
-export const selectBPM = state => state.appSession.bpm;
+export const selectBPM = state => state.appSession;
+export const selectKeySignature = state => state.appSession.keySignature;
+export const selectTimeSignature = state => state.appSession.timeSignature;
+export const selectPlaybackStatus = state => state.appSession.playbackStatus;
+export const selectComposition = state => state.appSession.composition;
 
 //with arguments
-export const selectStation = (state, stationName) => state.currentSession.stations[stationName];
+// export const selectStation = (state, stationName) => state.currentSession.stations[stationName];

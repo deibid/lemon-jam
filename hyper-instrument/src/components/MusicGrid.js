@@ -9,7 +9,6 @@ const gridStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(4),
     maxHeight: "52vh"
   }
-
 }));
 
 
