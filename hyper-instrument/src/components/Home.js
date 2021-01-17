@@ -16,6 +16,7 @@ import { selectBPM, selectKeySignature, selectTimeSignature, selectPlaybackStatu
 import ActionBar from './ActionBar';
 import BPMInput from './BPMInput';
 import TimeSignatureInput from './TimeSignatureInput';
+import KeySignatureInput from './KeySignatureInput';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -178,7 +179,8 @@ function Home() {
     <Container maxWidth={false} className={classes.root}>
       <ActionBar />
       {/* <BPMInput /> */}
-      <TimeSignatureInput />
+      {/* <TimeSignatureInput /> */}
+      <KeySignatureInput />
       {/* <Typography variant='h1'>Hyper Instrument</Typography>
       <MusicGrid scaleMapping={scaleMapping} onOpenListener={openModal} currentBeat={currentBeat} copyMode={copyMode} />
       {modalOpen && <ScaleInputModal onCloseListener={modalClosed} scale={selectedScale} />}

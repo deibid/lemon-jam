@@ -25,7 +25,7 @@ export const KeySignatures_key = Object.freeze({
   'G#': 'G#',
   'A': 'A',
   'A#': 'A#',
-  'B': 'C'
+  'B': 'B'
 });
 
 //Ask Zeng about the word 'mode'
@@ -40,7 +40,10 @@ const initialState = {
   playbackStatus: PlaybackStatues.STOP,
   bpm: 120,
   timeSignature: TimeSignatures['4/4'],
-  keySignature: `${KeySignatures_key.C} ${KeySignatures_mode.MAJOR}`,
+  keySignature: {
+    key: KeySignatures_key.C,
+    mode: KeySignatures_mode.MAJOR
+  },
   composition: {},
 }
 
@@ -52,8 +55,11 @@ export const appSessionSlice = createSlice({
     changeBPM: (state, action) => {
       state.bpm = action.payload.data;
     },
-    changeKeySignature: (state, action) => {
-      state.keySignature = action.payload.data;
+    changeKeySignatureKey: (state, action) => {
+      state.keySignature.key = action.payload.data;
+    },
+    changeKeySignatureMode: (state, action) => {
+      state.keySignature.mode = action.payload.data;
     },
     changeTimeSignature: (state, action) => {
       state.timeSignature = action.payload.data;
@@ -70,7 +76,7 @@ export const appSessionSlice = createSlice({
 
 
 export const {
-  changeBPM, changeKeySignature, changeTimeSignature, changePlaybackStatus, editComposition }
+  changeBPM, changeKeySignatureKey, changeKeySignatureMode, changeTimeSignature, changePlaybackStatus, editComposition }
   = appSessionSlice.actions;
 export default appSessionSlice.reducer;
 

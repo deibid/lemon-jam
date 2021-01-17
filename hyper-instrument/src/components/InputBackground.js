@@ -7,7 +7,9 @@ const useStyles = makeStyles(theme => ({
     background: theme.palette.common.accentBlue,
     padding: theme.spacing(2),
     borderRadius: 10,
-    width: 'fit-content'
+    width: 'fit-content',
+    display: 'flex',
+    flexDirection: 'column'
 
   },
   subContainer: {
@@ -24,11 +26,25 @@ const InputBackground = (props) => {
 
   const classes = useStyles();
 
+  const disableSubContainer = props.disableSubContainer;
+
   return (
-    <div className={classes.root}>
-      <div className={classes.subContainer}>
-        {props.children}
-      </div>
+    <div className={classes.root} >
+
+
+      {disableSubContainer ?
+
+        <>
+          { props.children}
+        </>
+        :
+        <div className={classes.subContainer}>
+          {props.children}
+        </div>
+
+
+      }
+
 
 
     </div>
