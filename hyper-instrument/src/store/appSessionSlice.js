@@ -74,7 +74,7 @@ export const {
 export default appSessionSlice.reducer;
 
 
-export const selectBPM = state => state.appSession;
+export const selectBPM = state => state.appSession.bpm;
 export const selectKeySignature = state => state.appSession.keySignature;
 export const selectTimeSignature = state => state.appSession.timeSignature;
 export const selectPlaybackStatus = state => state.appSession.playbackStatus;

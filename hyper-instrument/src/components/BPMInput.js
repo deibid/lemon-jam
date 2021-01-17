@@ -5,6 +5,8 @@ import { Typography, Container, Button, makeStyles, Grid, Input, Slider, Box } f
 
 import { GraySlider } from './Slider';
 import InputBackground from './InputBackground';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectBPM, changeBPM } from '../store/appSessionSlice';
 
 
 const useStyles = makeStyles(theme => ({
@@ -41,10 +43,12 @@ const BPMInput = (props) => {
 
 
   const classes = useStyles();
+  const dispatch = useDispatch();
 
+  const bpm = useSelector(selectBPM);
 
-  const handleInputChange = (event) => {
-    props.onBPMChange(event.target.value === '' ? '' : Number(event.target.value));
+  const handleChange = (event, value) => {
+    dispatch(changeBPM({ data: value }));
   };
 
 
@@ -54,10 +58,10 @@ const BPMInput = (props) => {
       <InputBackground>
 
         <Box className={classes.subContainer} display='flex' alignItems='center'>
-          <GraySlider className={classes.slider} />
+          <GraySlider min={40} max={220} onChange={handleChange} className={classes.slider} />
 
           <div className={classes.value}>
-            <Typography variant='body2'>5</Typography>
+            <Typography variant='body2'>{bpm}</Typography>
           </div>
 
         </Box>
