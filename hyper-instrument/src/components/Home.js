@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectBPM, selectKeySignature, selectTimeSignature, selectPlaybackStatus, selectComposition } from './../store/appSessionSlice';
 
 import ActionBar from './ActionBar';
+import BPMInput from './BPMInput';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -175,6 +176,7 @@ function Home() {
 
     <Container maxWidth={false} className={classes.root}>
       <ActionBar />
+      <BPMInput />
       {/* <Typography variant='h1'>Hyper Instrument</Typography>
       <MusicGrid scaleMapping={scaleMapping} onOpenListener={openModal} currentBeat={currentBeat} copyMode={copyMode} />
       {modalOpen && <ScaleInputModal onCloseListener={modalClosed} scale={selectedScale} />}

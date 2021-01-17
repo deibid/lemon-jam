@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Typography, Container, Button, makeStyles } from '@material-ui/core';
 
-import BPMDial from './BPMDial';
+import BPMDial from './BPMInput';
 
 
 const useStyles = makeStyles({
