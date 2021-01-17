@@ -8,8 +8,9 @@ export const PlaybackStatues = Object.freeze({
 });
 
 export const TimeSignatures = Object.freeze({
+  '3/4': '3/4',
   '4/4': '4/4',
-  '3/6': '3/6'
+  '6/8': '6/8'
 });
 
 export const KeySignatures_key = Object.freeze({

@@ -10,19 +10,6 @@ import { selectBPM, changeBPM } from '../store/appSessionSlice';
 
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    width: 'fit-content',
-    marginTop: 40,
-    marginLeft: 40
-  },
-  input: {
-    width: 42,
-  },
-  subContainer: {
-    background: theme.palette.common.primaryBlue,
-    borderRadius: 5,
-    padding: theme.spacing(1)
-  },
   value: {
     display: 'flex',
     justifyContent: 'center',
@@ -57,14 +44,10 @@ const BPMInput = (props) => {
 
       <InputBackground>
 
-        <Box className={classes.subContainer} display='flex' alignItems='center'>
-          <GraySlider min={40} max={220} onChange={handleChange} className={classes.slider} />
-
-          <div className={classes.value}>
-            <Typography variant='body2'>{bpm}</Typography>
-          </div>
-
-        </Box>
+        <GraySlider min={40} max={220} onChange={handleChange} className={classes.slider} />
+        <div className={classes.value}>
+          <Typography variant='body2'>{bpm}</Typography>
+        </div>
       </InputBackground>
     </div>
   );

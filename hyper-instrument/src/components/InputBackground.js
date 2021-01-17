@@ -6,7 +6,16 @@ const useStyles = makeStyles(theme => ({
   root: {
     background: theme.palette.common.accentBlue,
     padding: theme.spacing(2),
-    borderRadius: 10
+    borderRadius: 10,
+    width: 'fit-content'
+
+  },
+  subContainer: {
+    background: theme.palette.common.primaryBlue,
+    borderRadius: 5,
+    padding: theme.spacing(1),
+    display: 'flex',
+    alignItems: 'center'
   }
 }));
 
@@ -17,7 +26,10 @@ const InputBackground = (props) => {
 
   return (
     <div className={classes.root}>
-      {props.children}
+      <div className={classes.subContainer}>
+        {props.children}
+      </div>
+
 
     </div>
   )
