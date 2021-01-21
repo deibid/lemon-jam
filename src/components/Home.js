@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { Container, Typography, Button, Modal, Backdrop } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/Styles';
+import { Container, Typography, Button, Modal, Backdrop, makeStyles } from '@material-ui/core';
 import * as Tone from 'tone'
 import * as jsonexport from 'jsonexport/dist';
 
