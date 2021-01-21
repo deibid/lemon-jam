@@ -188,17 +188,15 @@ function Home() {
     <Container maxWidth={false} className={classes.root}>
       <ActionBar />
 
+      <MusicGrid />
+
       {/* <Typography variant='h1'>Hyper Instrument</Typography>
       <MusicGrid scaleMapping={scaleMapping} onOpenListener={openModal} currentBeat={currentBeat} copyMode={copyMode} />
       {modalOpen && <ScaleInputModal onCloseListener={modalClosed} scale={selectedScale} />}
       <PlaybackControls isPlaying={isPlaying} handlePlaybackButtonClick={handlePlaybackChange} bpm={bpm} onBPMChange={handleBPMChange} />
       <Button onClick={handleCopyModeChange} variant='filled'>{copyMode ? 'Stop Copying' : 'Enter Copy Mode'}</Button>
       <Button onClick={exportState} variant='contained'>Export</Button> */}
-      <Backdrop className={classes.backdrop} open={backdropOpen} onClick={handleBackdropClose}>
-        {/* <BPMInput />
-        <TimeSignatureInput />
-        <KeySignatureInput /> */}
-      </Backdrop>
+      <Backdrop className={classes.backdrop} open={backdropOpen} onClick={handleBackdropClose} />
     </Container>
 
 
