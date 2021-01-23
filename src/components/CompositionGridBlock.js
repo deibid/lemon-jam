@@ -4,13 +4,18 @@ import { makeStyles, Typography, Box } from '@material-ui/core';
 const useStyles = makeStyles(theme => ({
   root: {
     background: '#fff',
-    borderRadius: 10
+    border: '3px solid #D0D0D0',
+    borderRadius: '50%',
+    minHeight: 88,
+    minWidth: 88,
+    maxHeight: 88,
+    maxWidth: 88
   }
 }));
 
 
 
-const MusicGridBlock = () => {
+const CompositionGridBlock = () => {
 
   const classes = useStyles();
 
@@ -26,4 +31,4 @@ const MusicGridBlock = () => {
 }
 
 
-export default MusicGridBlock;
+export default CompositionGridBlock;

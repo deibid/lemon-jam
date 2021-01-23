@@ -1,9 +1,12 @@
 import { createMuiTheme } from '@material-ui/core';
 
 
-const primaryBlue = '#0A2E64';
-const secondaryBlue = '#3D567E';
-const accentBlue = '#697C9C';
+const primaryBlue = '#26AAED';
+const secondaryBlue = '#58B4E2';
+const accentBlue = '#00517E';
+const lightBlue = '#77BADD';
+const mediumBlue = '#107AAE';
+const darkBlue = '#00517E'
 
 
 
@@ -29,7 +32,11 @@ const theme = createMuiTheme({
     common: {
       primaryBlue: primaryBlue,
       secondaryBlue: secondaryBlue,
-      accentBlue: accentBlue
+      accentBlue: accentBlue,
+      lightBlue: lightBlue,
+      mediumBlue: mediumBlue,
+      darkBlue: darkBlue
+
     }
   }
 });

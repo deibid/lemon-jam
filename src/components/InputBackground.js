@@ -4,16 +4,15 @@ import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    background: theme.palette.common.accentBlue,
+    background: theme.palette.common.mediumBlue,
     padding: theme.spacing(2),
     borderRadius: 10,
     width: 'fit-content',
     display: 'flex',
     flexDirection: 'column'
-
   },
   subContainer: {
-    background: theme.palette.common.primaryBlue,
+    background: theme.palette.common.darkBlue,
     borderRadius: 5,
     padding: theme.spacing(1),
     display: 'flex',

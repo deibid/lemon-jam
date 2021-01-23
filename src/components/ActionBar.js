@@ -20,13 +20,16 @@ const useStyles = makeStyles(theme => ({
     zIndex: theme.zIndex.drawer + 2
   },
   file: {
-    flexGrow: 2
+    flexBasis: '33%',
+    flexGrow: 1
   },
   actions: {
-    flexGrow: 3
+    flexBasis: '33%',
+    flexGrow: 1
   },
   inputs: {
-    flexGrow: 2,
+    flexBasis: '33%',
+    flexGrow: 1
   },
   paper: {
     background: theme.palette.common.primaryBlue,

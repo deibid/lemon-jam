@@ -13,7 +13,11 @@ const useStyles = makeStyles(theme => ({
 
   button: {
     margin: theme.spacing(0, 1),
-    width: theme.spacing(8)
+    width: theme.spacing(8),
+    '&$selected': {
+      background: '#fff'
+    },
+    selected: {}
   },
   title: {
     color: '#fff',

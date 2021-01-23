@@ -26,7 +26,7 @@ const InputsBar = () => {
 
 
   return (
-    <Box display='flex'>
+    <Box display='flex' alignItems='center' justifyContent="center">
 
       <Button className={classes.button} onClick={handleClick(Attributes.BPM)}>BPM</Button>
       <Button className={classes.button} onClick={handleClick(Attributes.TIME_SIGNATURE)}>Time Signature</Button>

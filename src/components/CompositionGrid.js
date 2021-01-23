@@ -3,42 +3,48 @@ import { useState } from 'react';
 import { makeStyles, Button, Container, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Grid } from '@material-ui/core'
 import { useSelector } from 'react-redux';
 import { selectTimeSignature } from '../store/appSessionSlice';
-import MusicGridBlock from './MusicGridBlock';
+import CompositionGridBlock from './CompositionGridBlock';
 
 
 
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: theme.spacing(4),
-    maxHeight: "52vh"
+    height: '50vh',
+    overflow: 'scroll'
   }
 }));
 
 
-function MusicGrid(props) {
+function CompositionGrid(props) {
+
+  const classes = useStyles();
 
   const timeSignature = useSelector(selectTimeSignature);
   const numerator = timeSignature.split("/")[0];
   const columns = (numerator === '3' || numerator === '6') ? 6 : 8;
-  const itemWidth = 12 / columns;
+  const numberOfBlocks = 48;
+  let itemWidth = 12 / columns;
+  itemWidth = 2;
 
   console.log(columns)
 
   const musicGridBlocks = [];
-  for (let i = 0; i < columns; i++) {
+  for (let i = 0; i < numberOfBlocks; i++) {
     musicGridBlocks.push(
-      <Grid item xs={2}>
-        <MusicGridBlock />
+      <Grid item xs={itemWidth}>
+        <CompositionGridBlock />
       </Grid>
     );
   }
 
   return (
 
-    <Grid container spacing={2}>
-      {musicGridBlocks}
-    </Grid>
+    <Container maxWidth={'md'} className={`${classes.root} ${props.className}`}>
+      <Grid container spacing={2}>
+        {musicGridBlocks}
+      </Grid>
+    </Container>
 
   )
 
@@ -143,4 +149,4 @@ function Bar(props) {
 }
 
 
-export default MusicGrid;
+export default CompositionGrid;

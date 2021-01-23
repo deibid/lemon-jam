@@ -6,7 +6,7 @@ import * as jsonexport from 'jsonexport/dist';
 
 import { scaleNameFromBinaryString } from './../utils/MusicTheory';
 
-import MusicGrid from './MusicGrid';
+import CompositionGrid from './CompositionGrid';
 import ScaleInputModal from './ScaleInputModal';
 import PlaybackControls from './PlaybackControls';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
     height: "100vh",
-    backgroundColor: "#fefefe",
+    backgroundColor: "#F8FDFF",
     display: "flex",
     flexDirection: "column",
     textAlign: "center",
@@ -29,6 +29,9 @@ const useStyles = makeStyles(theme => ({
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1
+  },
+  musicGrid: {
+    marginTop: theme.spacing(10)
   }
 }));
 
@@ -187,7 +190,7 @@ function Home() {
     <Container maxWidth={false} className={classes.root}>
       <ActionBar />
 
-      <MusicGrid />
+      <CompositionGrid className={classes.musicGrid} />
 
       {/* <Typography variant='h1'>Hyper Instrument</Typography>
       <MusicGrid scaleMapping={scaleMapping} onOpenListener={openModal} currentBeat={currentBeat} copyMode={copyMode} />

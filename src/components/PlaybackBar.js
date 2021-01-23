@@ -13,7 +13,7 @@ const PlaybackBar = () => {
 
 
   return (
-    <Box display='flex'>
+    <Box display='flex' alignItems='center' justifyContent="center">
       <StopButton />
       <PlayButton />
     </Box>

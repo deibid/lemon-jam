@@ -35,7 +35,7 @@ const FileBar = () => {
   }
 
   return (
-    <Box display='flex'>
+    <Box display='flex' alignItems='center' justifyContent="center">
 
       <div className={classes.logo} style={LogoStyle} />
       <Button className={classes.button} onClick={handleClick('file')}>File</Button>

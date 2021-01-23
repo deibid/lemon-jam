@@ -3,14 +3,14 @@ import { Slider, withStyles } from '@material-ui/core';
 
 export const GraySlider = withStyles(theme => ({
   root: {
-    color: theme.palette.common.accentBlue,
+    color: theme.palette.common.lightBlue,
     height: 4,
     width: 180
   },
   thumb: {
     height: 20,
     width: 20,
-    backgroundColor: theme.palette.common.accentBlue,
+    backgroundColor: theme.palette.common.lightBlue,
     border: '2px solid currentColor',
     marginTop: -8,
     marginLeft: -12,

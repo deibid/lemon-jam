@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    background: theme.palette.common.accentBlue,
+    background: theme.palette.common.lightBlue,
     width: 48,
     height: 40,
     borderRadius: 3,

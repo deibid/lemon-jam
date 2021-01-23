@@ -5,7 +5,7 @@ import { SvgIcon, makeStyles } from '@material-ui/core';
 const useStyles = makeStyles(theme => ({
 
   root: {
-    background: '#3D567E',
+    background: theme.palette.common.secondaryGray,
     height: 29,
     width: 33
   }
