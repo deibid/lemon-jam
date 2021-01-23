@@ -32,6 +32,9 @@ const useStyles = makeStyles(theme => ({
   },
   musicGrid: {
     marginTop: theme.spacing(10)
+  },
+  banner: {
+    marginTop: theme.spacing(5)
   }
 }));
 
@@ -190,6 +193,7 @@ function Home() {
     <Container maxWidth={false} className={classes.root}>
       <ActionBar />
 
+      <Typography className={classes.banner} variant='subtitle2'>LemonJam is an active project. Daily updates will be pushed with new features and improvements, so stay tunned!</Typography>
       <CompositionGrid className={classes.musicGrid} />
 
       {/* <Typography variant='h1'>Hyper Instrument</Typography>
